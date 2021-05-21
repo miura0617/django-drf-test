@@ -33,7 +33,7 @@ pip freeze
 
 https://engineer-lifestyle-blog.com/code/python/django-restframework-cors-install-setting/
 
-python project\get_random_secret_key.py
+python rest_api\get_random_secret_key.py
 
 
 ## rest_api\local_settings.pyを作成し、先程作成したSECRET_KEYを定義します

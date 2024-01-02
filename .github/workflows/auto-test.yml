@@ -13,6 +13,11 @@ jobs:
     name: Preview
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          # Repository name with owner. For example, actions/checkout
+          # Default: ${{ github.repository }}
+          repository: "miura0617/django-drf-test"
       - run: |
           echo "Hello World!!"
           python -m pip install --upgrade pip

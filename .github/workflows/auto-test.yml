@@ -1,0 +1,17 @@
+name: "WorkFlow for Django REST Framework Auto Test"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/**
+  workflow_dispatch:
+
+jobs:
+  preview:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello World!!"

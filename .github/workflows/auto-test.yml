@@ -21,6 +21,8 @@ jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
+    outputs:
+      KEY_TEXT: ${{ steps.secretkey.outputs }}
     steps:
       - name: "Print workflow url"
         run: |
@@ -44,5 +46,9 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: "Output a key"
+        id: secretkey
         run: |
           python rest_api/get_random_secret_key.py
+      - name: "Create local_settings.py file"
+        run: |
+          cat preview.outputs.KEY_TEXT

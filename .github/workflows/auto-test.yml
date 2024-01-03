@@ -9,8 +9,8 @@ on:
       - .github/workflows/**
   workflow_dispatch:
 
-env:
-  # VERSION: 1.0.0
+# env:
+#   VERSION: 1.0.0
 
 defaults:
   run:

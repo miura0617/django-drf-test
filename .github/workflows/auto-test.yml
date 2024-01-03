@@ -37,6 +37,9 @@ jobs:
       - name: "Move to home directory"
         run: |
           cd ~
+          python -m venv venv
+          source ~/venv/Scripts/activate
+          pip install -r requirements.txt
       - name: "Setup python virtual environment phase1"
         run: |
           python -m venv venv

@@ -4,23 +4,46 @@ on:
   push:
     branches:
       - master
+      - feature/github-workflow
     paths:
       - .github/workflows/**
   workflow_dispatch:
+
+# env:
+#   VERSION: 1.0.0
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   preview:
     name: Preview
     runs-on: ubuntu-latest
+    outputs:
+      KEY_TEXT: ${{ steps.secretkey.outputs.exitcode }}
     steps:
-      - uses: actions/checkout@v4
+      - name: "Print workflow url"
+        run: |
+          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
         with:
           # Repository name with owner. For example, actions/checkout
-          # Default: ${{ github.repository }}
-          repository: "miura0617/django-drf-test"
-      - run: |
-          echo "Hello World!!"
+          repository: ${{ github.repository }}
+      - name: "Upgrade pip"
+        run: |
           python -m pip install --upgrade pip
-          python -m venv venv
-          source venv/Script/activate
+      - name: "Install python packages"
+        run: |
           pip install -r requirements.txt
+      - name: "Output a key"
+        id: secretkey
+        run: |
+          python rest_api/get_random_secret_key.py > rest_api/local_settings.py
+      - name: "Check local_settings.py file"
+        run: |
+          cat rest_api/local_settings.py
+      - name: "Run a test program"
+        run: |
+          python manage.py test

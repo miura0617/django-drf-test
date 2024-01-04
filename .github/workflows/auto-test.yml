@@ -15,7 +15,6 @@ on:
 defaults:
   run:
     shell: bash
-    # working-directory: "10_infra/"
 
 jobs:
   preview:
@@ -31,17 +30,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           # Repository name with owner. For example, actions/checkout
-          # Default: ${{ github.repository }}
-          repository: "miura0617/django-drf-test"
+          Default: ${{ github.repository }}
+          # repository: "miura0617/django-drf-test"
       - name: "Upgrade pip"
         run: |
           python -m pip install --upgrade pip
-      # - name: "Setup python virtual environment phase1"
-      #   run: |
-      #     python -m venv venv
-      # - name: "Setup python virtual environment phase2"
-      #   run: |
-      #     source ~/venv/Scripts/activate
       - name: "Install python packages"
         run: |
           pip install -r requirements.txt
